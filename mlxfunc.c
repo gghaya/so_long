@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 18:54:18 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 19:33:58 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/16 20:13:29 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,7 @@ void	put_images(t_struct *s)
 	var.i = 0;
 	while (s->map[var.i] != NULL)
 	{
-		var.j = 0;
-		var.x = 0;
-		while (s->map[var.i][var.j] != '\0')
-		{
-			mlx_put_image_to_window(s->w.mlx, s->w.win, s->v.imgback, var.x, var.y);
-			if (s->map[var.i][var.j] == 'C')
-				mlx_put_image_to_window(s->w.mlx, s->w.win, s->v.imgcollect, var.x, var.y);
-			if (s->map[var.i][var.j] == 'E')
-			{
-				if(s->c == 0)
-					mlx_put_image_to_window(s->w.mlx, s->w.win, s->v.imgdoor, var.x, var.y);
-				else
-					mlx_put_image_to_window(s->w.mlx, s->w.win, s->v.imgexit, var.x, var.y);
-			}
-			if (s->map[var.i][var.j] == 'P')
-				mlx_put_image_to_window(s->w.mlx, s->w.win, s->v.imgplayer, var.x, var.y);
-			if (s->map[var.i][var.j] == '1')
-				mlx_put_image_to_window(s->w.mlx, s->w.win, s->v.imgwall, var.x, var.y);
-			var.x += 64;
-			var.j++;
-		}
+		util1(s->map[var.i], s, var, 0);
 		var.y += 64;
 		var.i++;
 	}
@@ -77,25 +57,7 @@ void	skey(t_struct *s)
 	var.i = 0;
 	while (s->map[var.i] != NULL)
 	{
-		var.j = 0;
-		while (s->map[var.i][var.j] != '\0')
-		{
-			if (s->map[var.i][var.j] == 'P' && (s->map[var.i][var.j + 1] == '0'
-				|| s->map[var.i][var.j + 1] == 'C'))
-			{
-				if (s->map[var.i][var.j + 1] == 'C')
-					s->c--;
-				s->map[var.i][var.j] = '0';
-				s->map[var.i][var.j + 1] = 'P';
-				s->move++;
-				ft_printf("move %d\n", s->move);
-				return ;
-			}
-			if (s->map[var.i][var.j] == 'P' && s->map[var.i][var.j + 1] == 'E'
-				&& s->c == 0)
-				exit(0);
-			var.j++;
-		}
+		util2(s, var, s->map[var.i]);
 		var.i++;
 	}
 }

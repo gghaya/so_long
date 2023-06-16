@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:48 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 19:22:04 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/16 20:19:18 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ void	dkey(t_struct *s)
 	t_var	var;
 
 	var.i = 0;
-	var.c = 0;
-	var.e = 0;
-	var.p = 0;
 	while (s->map[var.i] != NULL)
 	{
 		var.j = 1;

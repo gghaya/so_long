@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:49:19 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 19:23:18 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/16 20:14:50 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,6 @@ int			backtracking(t_struct *s, int xp, int yp, char **map);
 void		check2(t_struct *s);
 char		**copyy(char	**map, int size);
 void		put_images(t_struct *s);
+void		util1(char *c, t_struct *s, t_var var, int i);
+void		util2(t_struct *s, t_var var, char *c);
 #endif
