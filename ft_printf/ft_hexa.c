@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_basehexa.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 22:12:32 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 19:28:29 by gghaya           ###   ########.fr       */
+/*   Created: 2022/11/13 16:36:44 by gghaya            #+#    #+#             */
+/*   Updated: 2022/11/16 22:12:06 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include"ft_printf.h"
 
-int	ft_strncmp(const char *first, const char *second, size_t n)
+int	ft_hexa(unsigned int nb, char c)
 {
-	unsigned char	*f ;
-	unsigned char	*s;
-	size_t			i;
+	char	*hextable;
+	int		r;
 
-	f = (unsigned char *)first;
-	s = (unsigned char *)second;
-	i = 0;
-	if (first == NULL)
-		return (-1);
-	while ((f[i] || s[i]) && i < n)
+	r = 0;
+	if (nb >= 16)
 	{
-		if (f[i] != s[i])
-			return ((unsigned char )f[i] - (unsigned char )s[i]);
-		i++;
+		r += ft_hexa(nb / 16, c);
+		r += ft_hexa(nb % 16, c);
 	}
-	return (0);
+	else if (c == 'X')
+	{
+		hextable = "0123456789ABCDEF" ;
+		r += ft_putchar(hextable[nb]);
+	}
+	else
+	{
+		hextable = "0123456789abcdef";
+		r += ft_putchar(hextable[nb]);
+	}
+	return (r);
 }

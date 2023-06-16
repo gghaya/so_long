@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 22:12:32 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 19:28:29 by gghaya           ###   ########.fr       */
+/*   Created: 2022/11/13 02:28:54 by gghaya            #+#    #+#             */
+/*   Updated: 2022/11/15 13:45:16 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef FT_PRINTF_H
 
-int	ft_strncmp(const char *first, const char *second, size_t n)
-{
-	unsigned char	*f ;
-	unsigned char	*s;
-	size_t			i;
+# define FT_PRINTF_H
 
-	f = (unsigned char *)first;
-	s = (unsigned char *)second;
-	i = 0;
-	if (first == NULL)
-		return (-1);
-	while ((f[i] || s[i]) && i < n)
-	{
-		if (f[i] != s[i])
-			return ((unsigned char )f[i] - (unsigned char )s[i]);
-		i++;
-	}
-	return (0);
-}
+# include<stdarg.h>
+# include<unistd.h>
+
+int	ft_printf(const char *str, ...);
+int	ft_putchar(char c);
+int	ft_putnbr(int nb);
+int	ft_putstr(char *str);
+int	ft_hexa(unsigned int nb, char c);
+int	ft_putptr(unsigned long ptr);
+int	ft_putunsigned(unsigned int nb);
+
+#endif

@@ -5,33 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/09 20:10:19 by gghaya            #+#    #+#              #
-#    Updated: 2023/06/16 19:17:04 by gghaya           ###   ########.fr        #
+#    Created: 2022/11/14 22:34:58 by gghaya            #+#    #+#              #
+#    Updated: 2022/11/16 22:58:46 by gghaya           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
+NAME = libftprintf.a
 CC = cc
-FLAGS =  -Wall -Werror -Wextra
-CFILES =  ft_strncmp.c ft_strrchr.c parcing.c get_next_line.c get_next_line_utils.c utils_solong.c check.c mlxfunc.c back_tracking.c mlxfunc2.c
+FLAGS = -Wall -Werror -Wextra
+CFILES = ft_hexa.c ft_putnbr.c ft_putptr.c ft_putchar.c ft_putstr.c ft_putunsigned.c ft_printf.c
 OFILES = ${CFILES:.c=.o}
-PRINTFDIR = ft_printf  
-PRINTF = ft_printf/libftprintf.a
 
 all : ${NAME}
 
-${NAME}: ${OFILES} so_long.h ${CFILES}  ${PRINTF}
-	${CC}  ${FLAGS}  ${PRINTF} ${OFILES}  -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
-${PRINTF}:
-	${MAKE} -C ${PRINTFDIR}
-%.o:%.c so_long.h
-	${CC} -Imlx -c  ${FLAGS} $<
+${NAME} : ${OFILES}
+	ar -crs ${NAME} ${OFILES}
+
+%.o : %.c ft_printf.h
+	${CC} ${FLAGS} -c $<
 
 clean :
 	rm -f ${OFILES}
-	${MAKE} clean -C ${PRINTFDIR}
+
 fclean : clean
 	rm -f ${NAME}
-	${MAKE} fclean -C ${PRINTFDIR}
+
 re : fclean all
+
 .PHONY: clean fclean re all

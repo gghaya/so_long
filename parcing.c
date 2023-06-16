@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:46:22 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/14 22:26:46 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/16 19:19:28 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 t_struct	*readmap(char *filename)
 {
-	char	*str;
-	int		fd;
+	char		*str;
+	int			fd;
 	t_struct	s;
 
 	fd = open(filename, O_CREAT | O_RDWR, 0777);
 	if (fd == -1)
 	{
-		write(1, "Error\n", 6);
+		ft_printf("Error\n");
 		exit(1);
 	}
 	s.size = 0;
-	// exit(1);
 	str = get_next_line(fd);
 	while (str != NULL)
 	{
@@ -44,7 +43,6 @@ t_struct	*fillin_map(char *filename, t_struct *s)
 	t_varr	v;
 
 	v.fd = open(filename, O_CREAT | O_RDWR, 0777);
-	// if
 	v.str = get_next_line(v.fd);
 	v.len = ft_strlen(v.str);
 	s->len = v.len;
@@ -57,15 +55,13 @@ t_struct	*fillin_map(char *filename, t_struct *s)
 			v.len++;
 		s->map[v.i] = malloc ((v.len) * sizeof(char));
 		s->map[v.i] = ft_strncpy(s->map[v.i], v.str, v.len - 1);
-		puts(s->map[v.i]);
 		free(v.str);
 		v.str = get_next_line(v.fd);
 		v.len = ft_strlen(v.str);
 		v.i++;
 	}
-	s->c = check(s);
+	check2(s);
 	new_win(s);
-
 	return (s);
 }
 
@@ -77,7 +73,7 @@ void	ft_error(char **map, int i)
 		i--;
 	}
 	free(map);
-	puts("Error\n");
+	ft_printf("Error\n");
 	exit(1);
 }
 
@@ -87,7 +83,7 @@ void	check_form(char **map, int size, int len)
 		ft_error(map, 0);
 }
 
-int	main2(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	(void)argc;
 	// char** map =
@@ -100,12 +96,12 @@ int	main2(int argc, char **argv)
 	return(0);
 }
 
-void	leaks()
-{
-	system("leaks so_long");
-}
-int main(int ar, char**arg)
-{
-	main2(ar, arg);
-	// atexit(leaks);
-}
+// void	leaks()
+// {
+// 	system("leaks so_long");
+// }
+// int main(int ar, char**arg)
+// {
+// 	main2(ar, arg);
+// 	// atexit(leaks);
+// }

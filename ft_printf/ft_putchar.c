@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin copy.c                                  :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 22:50:29 by gghaya            #+#    #+#             */
-/*   Updated: 2023/05/05 15:57:17 by gghaya           ###   ########.fr       */
+/*   Created: 2022/11/13 02:27:11 by gghaya            #+#    #+#             */
+/*   Updated: 2022/11/16 22:11:03 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include"ft_printf.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_putchar(char c)
 {
-	char	*concat;
-	size_t	len;
-
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	concat = (char *)malloc(len + 1);
-	if (!concat)
-		return (NULL);
-	ft_memcpy(concat, s1, ft_strlen(s1));
-	ft_memcpy(concat + ft_strlen(s1), s2, ft_strlen(s2));
-	concat[len] = '\0';
-	return (concat);
+	return (write (1, &c, 1));
 }

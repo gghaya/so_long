@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 22:12:32 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 19:28:29 by gghaya           ###   ########.fr       */
+/*   Created: 2022/06/19 23:59:09 by gghaya            #+#    #+#             */
+/*   Updated: 2022/11/16 22:11:06 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include"ft_printf.h"
 
-int	ft_strncmp(const char *first, const char *second, size_t n)
+int	ft_putnbr(int nb)
 {
-	unsigned char	*f ;
-	unsigned char	*s;
-	size_t			i;
+	long	n;
+	int		r;
 
-	f = (unsigned char *)first;
-	s = (unsigned char *)second;
-	i = 0;
-	if (first == NULL)
-		return (-1);
-	while ((f[i] || s[i]) && i < n)
+	r = 0;
+	n = nb;
+	if (n < 0)
 	{
-		if (f[i] != s[i])
-			return ((unsigned char )f[i] - (unsigned char )s[i]);
-		i++;
+		r += ft_putchar('-');
+		n *= -1;
 	}
-	return (0);
+	if (n >= 10)
+	{
+		r += ft_putnbr(n / 10);
+		r += ft_putnbr(n % 10);
+	}
+	else
+		r += ft_putchar(n + '0');
+	return (r);
 }

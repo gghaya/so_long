@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:49:19 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/14 20:42:25 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/16 19:23:18 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@
 # define BACK	"img/AnyConv.com__background.xpm"
 # define DOOR	"img/AnyConv.com__dooropened.xpm"
 # include <stdlib.h>
-# include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
-# include <string.h>
 # include "get_next_line.h"
 # include "mlx/mlx.h"
+# include "ft_printf/ft_printf.h"
 
 typedef struct s_data {
 	void	*img;
@@ -41,6 +39,8 @@ typedef struct s_var
 	int	e;
 	int	p;
 	int	j;
+	int	x;
+	int	y;
 }	t_var;
 typedef struct var
 {
@@ -79,35 +79,40 @@ typedef struct s_s
 	char	**map;
 	int		size;
 	int		len;
-	int		x;
-	int		y;
+	int		xp;
+	int		yp;
+	int		xe;
+	int		ye;
 	int		c;
+	int		move;
 }				t_struct;
 
-int		ft_atoi(const char *str);
-size_t	ft_strlen(const char *s);
-void	check_extension(char *fname);
-char	*ft_strrchr(const char *string, int searchedChar);
-int		ft_strncmp(const char *first, const char *second, size_t n);
-char	**ft_split(char const *s, char c);
-char	*ft_strncpy(char *dest, char *src, unsigned int n);
+int			ft_atoi(const char *str);
+size_t		ft_strlen(const char *s);
+void		check_extension(char *fname);
+char		*ft_strrchr(const char *string, int searchedChar);
+int			ft_strncmp(const char *first, const char *second, size_t n);
+char		*ft_strncpy(char *dest, char *src, unsigned int n);
 t_struct	*fillin_map(char *filename, t_struct *s);
-void	ft_error(char **map, int i);
-int	checkcaracteres(char	**map);
-void	check_walls(char	**map, int size);
-void	checkcontour(char **map, int size, int len);
-int	check(t_struct	*s);
-void	check_form(char **map, int size, int len);
-int		ft_strsearch(const char *string, int searchedChar);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		ft_close(t_win *w);
+void		ft_error(char **map, int i);
+int			checkcaracteres(char	**map, int i, int j);
+void		check_walls(char	**map, int size);
+void		checkcontour(char **map, int size, int len);
+int			check(t_struct	*s);
+void		check_form(char **map, int size, int len);
+int			ft_strsearch(const char *string, int searchedChar);
+int			ft_close(t_win *w);
 t_struct	*new_win(t_struct	*s);
 t_struct	*initt(t_struct	*s);
-int	ft_handelpress(int key, t_struct *s);
-void manage_events(t_struct *s);
-void wkey(t_struct *s);
-void	dkey(t_struct *s);
-void	akey(t_struct *s);
-void f(t_struct *s);
-void	skey(t_struct *s);
+int			ft_handelpress(int key, t_struct *s);
+t_struct	*readmap(char *filename);
+void		manage_events(t_struct *s);
+void		wkey(t_struct *s);
+void		dkey(t_struct *s);
+void		akey(t_struct *s);
+void		skey(t_struct *s);
+int			backtracking(t_struct *s, int xp, int yp, char **map);
+void		check2(t_struct *s);
+char		**copyy(char	**map, int size);
+void		put_images(t_struct *s);
 #endif

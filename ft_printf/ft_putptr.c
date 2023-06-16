@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 22:12:32 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 19:28:29 by gghaya           ###   ########.fr       */
+/*   Created: 2022/11/14 01:19:52 by gghaya            #+#    #+#             */
+/*   Updated: 2022/11/16 22:11:10 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include"ft_printf.h"
 
-int	ft_strncmp(const char *first, const char *second, size_t n)
+int	ft_putptr(unsigned long ptr)
 {
-	unsigned char	*f ;
-	unsigned char	*s;
-	size_t			i;
+	char	*hexa;
+	int		r;
 
-	f = (unsigned char *)first;
-	s = (unsigned char *)second;
-	i = 0;
-	if (first == NULL)
-		return (-1);
-	while ((f[i] || s[i]) && i < n)
+	hexa = "0123456789abcdef";
+	r = 0;
+	if (ptr >= 16)
 	{
-		if (f[i] != s[i])
-			return ((unsigned char )f[i] - (unsigned char )s[i]);
-		i++;
+		r += ft_putptr(ptr / 16);
+		r += ft_putptr(ptr % 16);
 	}
-	return (0);
+	else
+		r += ft_putchar(hexa[ptr]);
+	return (r);
 }
