@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:12:32 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 20:14:01 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/17 16:14:49 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,49 @@ void	util2(t_struct *s, t_var var, char *c)
 			return ;
 		}
 		if (c[var.j] == 'P' && c[var.j + 1] == 'E'
+			&& s->c == 0)
+			exit(0);
+		var.j++;
+	}
+}
+
+void	util3(t_struct *s, t_var var, char *c, char *cc)
+{
+	var.j = 1;
+	while (c[var.j] != '\0')
+	{
+		if (c[var.j] == 'P' && (cc[var.j] == '0' || cc[var.j] == 'C'))
+		{
+			if (cc[var.j] == 'C')
+				s->c--;
+			c[var.j] = '0';
+			cc[var.j] = 'P';
+			s->move++;
+			ft_printf ("move %d\n", s->move);
+			return ;
+		}
+		if (c[var.j] == 'P' && cc[var.j] == 'E'
+			&& s->c == 0)
+			exit(0);
+		var.j++;
+	}
+}
+
+void	util4(t_struct *s, t_var var, char *c, char *cc)
+{
+	var.j = 0;
+	while (c[var.j] != '\0')
+	{
+		if (c[var.j] == 'P' && (cc[var.j] == '0' || cc[var.j] == 'C'))
+		{
+			if (cc[var.j] == 'C')
+				s->c--;
+			s->map[var.i -1][var.j] = 'P';
+			c[var.j] = '0';
+			s->move++;
+			ft_printf ("move %d\n", s->move);
+		}
+		if (c[var.j] == 'P' && cc[var.j] == 'E'
 			&& s->c == 0)
 			exit(0);
 		var.j++;

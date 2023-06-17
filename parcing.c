@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:46:22 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 20:47:09 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/17 16:00:52 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ t_struct	*readmap(char *filename)
 	int			fd;
 	t_struct	s;
 
-	fd = open(filename, O_CREAT | O_RDWR, 0777);
+	fd = open(filename, O_RDWR, 0777);
 	if (fd == -1)
-	{
-		ft_printf("Error\n");
-		exit(1);
-	}
+		ft_error();
 	s.size = 0;
 	str = get_next_line(fd);
 	while (str != NULL)
@@ -42,17 +39,19 @@ t_struct	*fillin_map(char *filename, t_struct *s)
 {
 	t_varr	v;
 
-	v.fd = open(filename, O_CREAT | O_RDWR, 0777);
+	v.fd = open(filename, O_RDWR, 0777);
 	v.str = get_next_line(v.fd);
 	v.len = ft_strlen(v.str);
 	s->len = v.len;
 	v.i = 0;
+	if (!v.str)
+		ft_error();
 	while (v.str != NULL)
 	{
-		if (v.str[0] == '\n')
-			ft_error(s->map, v.i);
 		if (v.i == s->size - 1)
 			v.len++;
+		if (v.len != s->len || v.len > 40 || s->size > 22 || v.str[0] == '\n')
+			ft_error();
 		s->map[v.i] = malloc ((v.len) * sizeof(char));
 		s->map[v.i] = ft_strncpy(s->map[v.i], v.str, v.len - 1);
 		free(v.str);
@@ -65,43 +64,16 @@ t_struct	*fillin_map(char *filename, t_struct *s)
 	return (s);
 }
 
-void	ft_error(char **map, int i)
+void	ft_error(void)
 {
-	while (i >= 0)
-	{
-		free(map[i]);
-		i--;
-	}
-	free(map);
 	ft_printf("Error\n");
-	exit(1);
-}
-
-void	check_form(char **map, int size, int len)
-{
-	if (len - 1 == size)
-		ft_error(map, 0);
+	exit(0);
 }
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	// char** map =
+	if (argc == 2)
+		check_extension(argv[1]);
 	readmap(argv[1]);
-
-	// int i = -1;
-	// while(++i < 7)
-	// 	free(map[i]);
-	// free(map); while true ;do leaks so_long; done;
-	return(0);
+	return (0);
 }
-
-// void	leaks()
-// {
-// 	system("leaks so_long");
-// }
-// int main(int ar, char**arg)
-// {
-// 	main2(ar, arg);
-// 	// atexit(leaks);
-// }

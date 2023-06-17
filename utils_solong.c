@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 13:15:14 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 17:37:40 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/17 15:55:53 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	check2(t_struct *s)
 	}
 	i = backtracking(s, s->xp, s->yp, copy);
 	if (i == 0)
-		ft_error(s->map, s->size - 1);
+		ft_error();
 }
 
 t_struct	*initt(t_struct	*s)
@@ -83,6 +83,7 @@ t_struct	*initt(t_struct	*s)
 	v.imgback = mlx_xpm_file_to_image(s->w.mlx, BACK, &v.h, &v.w);
 	v.imgdoor = mlx_xpm_file_to_image(s->w.mlx, DOOR, &v.h, &v.w);
 	s->v = v;
+	ft_checkimages(v);
 	s->move = 0;
 	put_images(s);
 	return (s);

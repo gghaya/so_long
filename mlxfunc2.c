@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:48 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/16 20:19:18 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/17 16:15:23 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	akey(t_struct *s)
 				s->map[var.i][var.j] = '0';
 				s->map[var.i][var.j - 1] = 'P';
 				s->move++;
-				ft_printf("move %d\n",s->move);
+				ft_printf("move %d\n", s->move);
 			}
 			if (s->map[var.i][var.j] == 'P' && s->map[var.i][var.j - 1] == 'E'
 				&& s->c == 0)
@@ -49,24 +49,7 @@ void	dkey(t_struct *s)
 	while (s->map[var.i] != NULL)
 	{
 		var.j = 1;
-		while (s->map[var.i][var.j] != '\0')
-		{
-			if (s->map[var.i][var.j] == 'P' && (s->map[var.i + 1][var.j] == '0'
-				|| s->map[var.i + 1][var.j] == 'C'))
-			{
-				if  (s->map[var.i + 1][var.j] == 'C')
-					s->c--;
-				s->map[var.i][var.j] = '0';
-				s->map[var.i + 1][var.j] = 'P';
-				s->move++;
-				ft_printf("move %d\n",s->move);
-				return ;
-			}
-			if (s->map[var.i][var.j] == 'P' && s->map[var.i + 1][var.j] == 'E'
-				&& s->c == 0)
-				exit(0);
-			var.j++;
-		}
+		util3(s, var, s->map[var.i], s->map[var.i + 1]);
 		var.i++;
 	}
 }
@@ -81,24 +64,15 @@ void	wkey(t_struct *s)
 	var.p = 0;
 	while (s->map[var.i] != NULL)
 	{
-		var.j = 0;
-		while (s->map[var.i][var.j] != '\0')
-		{
-			if (s->map[var.i][var.j] == 'P' && (s->map[var.i - 1][var.j] == '0'
-				|| s->map[var.i - 1][var.j] == 'C'))
-			{
-				if (s->map[var.i - 1][var.j] == 'C')
-					s->c--;
-				s->map[var.i -1][var.j] = 'P';
-				s->map[var.i][var.j] = '0';
-				s->move++;
-				ft_printf("move %d\n",s->move);
-			}
-			if (s->map[var.i][var.j] == 'P' && s->map[var.i - 1][var.j] == 'E'
-				&& s->c == 0)
-				exit(0);
-			var.j++;
-		}
+		util3(s, var, s->map[var.i], s->map[var.i - 1]);
 		var.i++;
 	}
+}
+
+void	ft_checkimages(t_vvar	v)
+{
+	if (v.imgback == NULL || v.imgcollect == NULL || v.imgdoor == NULL)
+		ft_error();
+	if (v.imgexit == NULL || v.imgplayer == NULL || v.imgwall == NULL)
+		ft_error();
 }
