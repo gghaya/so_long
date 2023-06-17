@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 19:12:08 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/17 15:34:29 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/17 18:31:30 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,13 @@ int	checkcaracteres(char **map, int i, int j)
 		var.j = 0;
 		while (map[var.i][var.j] != '\0')
 		{
-			if (map[var.i][var.j] == 'C')
-				var.c++;
-			if (map[var.i][var.j] == 'E')
-				var.e++;
+			fstatment(map[var.i][var.j], &var);
 			if (map[var.i][var.j] == 'P')
 			{
 				var.p++;
 				i = var.i;
 				j = var.j;
 			}
-			if (map[var.i][var.j] != 'C' && map[var.i][var.j] != 'E'
-				&& map[var.i][var.j] != 'P' && map[var.i][var.j] != '0'
-				&& map[var.i][var.j] != '1')
-				ft_error();
 			var.j++;
 		}
 		var.i++;
@@ -54,7 +47,10 @@ void	check_extension(char *fname)
 
 	res = ft_strrchr(fname, '.');
 	if (ft_strncmp(res, ".ber", 4) != 0 || ft_strlen(res) != 4)
-		ft_error();
+	{
+		ft_printf("Error\ninvalid file extension\n");
+		exit(0);
+	}
 }
 
 void	check_walls(char	**map, int size)
@@ -70,7 +66,9 @@ void	check_walls(char	**map, int size)
 	while (map[size - 1][i] == '1')
 		i++;
 	if (map[size - 1][i] != '\0')
+	{
 		ft_error();
+	}
 }
 
 void	checkcontour(char **map, int size, int len)

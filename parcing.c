@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:46:22 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/17 16:00:52 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/17 18:28:59 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_struct	*fillin_map(char *filename, t_struct *s)
 void	ft_error(void)
 {
 	ft_printf("Error\n");
+	ft_printf("invalid map!\n");
 	exit(0);
 }
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 22:12:32 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/17 16:14:49 by gghaya           ###   ########.fr       */
+/*   Created: 2023/06/17 18:14:47 by gghaya            #+#    #+#             */
+/*   Updated: 2023/06/17 18:14:50 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	util2(t_struct *s, t_var var, char *c)
 	}
 }
 
-void	util3(t_struct *s, t_var var, char *c, char *cc)
+int	util3(t_struct *s, t_var var, char *c, char *cc)
 {
 	var.j = 1;
 	while (c[var.j] != '\0')
@@ -96,13 +96,14 @@ void	util3(t_struct *s, t_var var, char *c, char *cc)
 			cc[var.j] = 'P';
 			s->move++;
 			ft_printf ("move %d\n", s->move);
-			return ;
+			return (1);
 		}
 		if (c[var.j] == 'P' && cc[var.j] == 'E'
 			&& s->c == 0)
 			exit(0);
 		var.j++;
 	}
+	return (0);
 }
 
 void	util4(t_struct *s, t_var var, char *c, char *cc)

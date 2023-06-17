@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:49:19 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/17 16:15:42 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/17 18:33:48 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct s_s
 	int		ye;
 	int		c;
 	int		move;
+	int		i;
+	int		j;
 }				t_struct;
 
 int			ft_atoi(const char *str);
@@ -118,6 +120,9 @@ void		put_images(t_struct *s);
 void		util1(char *c, t_struct *s, t_var var, int i);
 void		util2(t_struct *s, t_var var, char *c);
 void		ft_checkimages(t_vvar	v);
-void		util3(t_struct *s, t_var var, char *c, char *cc);
+int			util3(t_struct *s, t_var var, char *c, char *cc);
 void		util4(t_struct *s, t_var var, char *c, char *cc);
+int			ft_strsearch(const char *string, int searchedChar);
+void		fstatment(char s, t_var *var);
+void		freecopy(char **c, int size);
 #endif

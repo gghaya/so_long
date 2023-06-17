@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 13:15:14 by gghaya            #+#    #+#             */
-/*   Updated: 2023/06/17 15:55:53 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/06/17 18:35:59 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,30 @@ char	**copyy(char	**map, int size)
 
 void	check2(t_struct *s)
 {
-	int		i;
-	int		j;
 	char	**copy;
 
 	copy = copyy(s->map, s->size);
-	i = 0;
+	s->i = 0;
 	s->c = check(s);
-	while (i < s->size)
+	while (s->i < s->size)
 	{
-		j = 0;
-		while (j < s->len)
+		s->j = 0;
+		while (s->j < s->len)
 		{
-			if (s->map[i][j] == 'P')
+			if (s->map[s->i][s->j] == 'P')
 			{
-				s->xp = i;
-				s->yp = j;
+				s->xp = s->i;
+				s->yp = s->j;
 				break ;
 			}
-			j++;
+			s->j++;
 		}
-		i++;
+		s->i++;
 	}
-	i = backtracking(s, s->xp, s->yp, copy);
-	if (i == 0)
+	s->i = backtracking(s, s->xp, s->yp, copy);
+	if (s->i == 0)
 		ft_error();
+	freecopy(copy, s->size);
 }
 
 t_struct	*initt(t_struct	*s)
